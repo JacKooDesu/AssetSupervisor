@@ -40,6 +40,7 @@ namespace AssetSupervisor
         // for path adding caching
         static string _pathBuffer;
         [SerializeField] List<string> _paths;
+        internal List<string> Paths => _paths;
         [MenuItem("Assets/Add To Asset Supervisor Path")]
         static void AddPath()
         {
@@ -58,5 +59,11 @@ namespace AssetSupervisor
             _pathBuffer = AssetDatabase.GetAssetPath(selection.GetInstanceID());
             return Directory.Exists(_pathBuffer);
         }
+
+        public enum EStrategy
+        {
+
+        }
+        [SerializeField] EStrategy _strategy;
     }
 }

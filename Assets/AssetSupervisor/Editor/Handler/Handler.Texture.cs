@@ -17,7 +17,6 @@ namespace AssetSupervisor
                 return;
 
             var texImporter = assetImporter as TextureImporter;
-
             if (texImporter is null)
                 return;
 

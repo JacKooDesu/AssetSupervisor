@@ -6,19 +6,22 @@ namespace AssetSupervisor
 {
     internal class AssetDetail
     {
-        AssetDetail(string fName)
+        AssetDetail(FileInfo fInfo)
         {
             using (var md5 = MD5.Create())
             {
-                using (var stream = File.OpenRead(fName))
+                var baseUri = new Uri(Constants.BASE_FOLDER);
+                Dir = baseUri.MakeRelativeUri(new(fInfo.Directory.FullName)).ToString();
+
+                using (var stream = File.OpenRead(fInfo.FullName))
                 {
-                    Name = stream.Name;
+                    Name = fInfo.Name;
                     MD5_Hash = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "").ToLowerInvariant();
                 }
             }
         }
 
-        public bool TryCreate(string fName, out AssetDetail result)
+        public static bool TryCreate(string fName, out AssetDetail result)
         {
             result = null;
 
@@ -27,16 +30,18 @@ namespace AssetSupervisor
 
             try
             {
-                result = new(fName);
+                result = new(new(fName));
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                UnityEngine.Debug.LogError(e);
                 return false;
             }
 
             return true;
         }
 
+        public readonly string Dir;
         public readonly string Name;
         public readonly string MD5_Hash;
     }

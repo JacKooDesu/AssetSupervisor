@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ace8c10ee74b64297eef8ca6786efa, type: 3}
   m_Name: Setting
   m_EditorClassIdentifier: 
-  _type: 4
-  _paths: []
+  _type: 0
+  _paths:
+  - Assets/Test/Texture
+  _strategy: 0
