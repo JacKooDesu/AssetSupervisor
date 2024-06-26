@@ -35,8 +35,8 @@ namespace AssetSupervisor
         }
 
         [SerializeField] ETrackType _type = 0;
-        public ETrackType Tracking => _type;
-
+        public bool Tracking(ETrackType type) =>
+            _type.HasFlag(type);
         // for path adding caching
         static string _pathBuffer;
         [SerializeField] List<string> _paths;
